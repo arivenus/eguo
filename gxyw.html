@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>感谢游玩 · 恶果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0ede8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            font-family: 'Georgia', 'Times New Roman', '楷体', serif;
+        }
+
+        .thanks-container {
+            max-width: 700px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 44px 40px 32px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e8e0d8;
+            text-align: center;
+        }
+
+        .ornament-top {
+            font-size: 0.8rem;
+            color: #c8b8a8;
+            letter-spacing: 16px;
+            margin-bottom: 6px;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 6px;
+            margin-bottom: 2px;
+        }
+
+        .main-title .highlight {
+            color: #b85a4a;
+        }
+
+        .sub-title {
+            font-size: 1.1rem;
+            color: #999088;
+            letter-spacing: 8px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin: 6px 0 16px 0;
+        }
+
+        .divider .line {
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: #ddd6ce;
+        }
+
+        .divider .diamond {
+            font-size: 0.6rem;
+            color: #c8b8a8;
+        }
+
+        .thanks-body {
+            font-size: 1.1rem;
+            line-height: 2.4;
+            color: #2a2a2a;
+            letter-spacing: 0.3px;
+        }
+
+        .thanks-body .label {
+            color: #bbb0a8;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+        }
+
+        .thanks-body .name {
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .thanks-body .name.highlight {
+            color: #b85a4a;
+        }
+
+        .thanks-body .sep {
+            color: #ddd6ce;
+            margin: 0 8px;
+        }
+
+        .thanks-body .funny-line {
+            color: #887e76;
+            font-style: italic;
+            font-size: 1rem;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee8e0;
+        }
+
+        .footer-note {
+            margin-top: 22px;
+            padding-top: 16px;
+            border-top: 1px solid #eee8e0;
+            font-size: 0.85rem;
+            color: #bbb0a8;
+            letter-spacing: 4px;
+        }
+
+        @media (max-width: 640px) {
+            .thanks-container {
+                padding: 28px 20px 24px;
+            }
+            .main-title {
+                font-size: 2.2rem;
+                letter-spacing: 4px;
+            }
+            .sub-title {
+                font-size: 0.9rem;
+                letter-spacing: 6px;
+            }
+            .thanks-body {
+                font-size: 1rem;
+                line-height: 2.2;
+            }
+            .thanks-body .label {
+                font-size: 0.8rem;
+            }
+            .thanks-body .funny-line {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .thanks-container {
+                padding: 20px 14px 18px;
+            }
+            .main-title {
+                font-size: 1.8rem;
+                letter-spacing: 3px;
+            }
+            .sub-title {
+                font-size: 0.75rem;
+                letter-spacing: 4px;
+            }
+            .thanks-body {
+                font-size: 0.92rem;
+                line-height: 2;
+            }
+            .thanks-body .label {
+                font-size: 0.7rem;
+            }
+            .thanks-body .funny-line {
+                font-size: 0.82rem;
+            }
+            .ornament-top {
+                font-size: 0.6rem;
+                letter-spacing: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="thanks-container">
+
+        <div class="ornament-top">✦ ✦ ✦ ✦ ✦</div>
+
+        <div class="main-title">
+            感谢<span class="highlight">游玩</span>
+        </div>
+        <div class="sub-title">— 真相已至 · 故事落幕 —</div>
+
+        <div class="divider">
+            <span class="line"></span>
+            <span class="diamond">◆</span>
+            <span class="line"></span>
+        </div>
+
+        <div class="thanks-body">
+
+            <div>
+                <span class="label">—</span>
+                恭喜您找到真相，感谢游玩！
+                <span class="label">—</span>
+            </div>
+
+            <div>
+                <span class="label">作者</span>
+                <span class="name highlight">AriVenus</span>
+                <span class="sep">|</span>
+                <span class="label">剧情</span>
+                <span class="name highlight">AriVenus</span>
+            </div>
+
+            <div class="divider" style="margin:2px 0 8px 0;opacity:0.3;">
+                <span class="line"></span>
+                <span class="diamond">·</span>
+                <span class="line"></span>
+            </div>
+
+            <div>
+                <span class="label">感谢名单</span>
+            </div>
+
+            <div>
+                <span class="name">制作：DeepSeek老师</span>
+                <span class="sep">|</span>
+                <span class="name">制图：豆包老师</span>
+            </div>
+
+            <div class="funny-line">
+                感谢我的电脑 · 我的鼠标 · 我的键盘 · 我的手机 · 和我掉的头发
+            </div>
+
+        </div>
+
+        <div class="footer-note">
+            本页面不涉及任何剧透，可分享
+        </div>
+
+    </div>
+<!-- 独立页码小标 -->
+<div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); color: #ffffff; font-size: 13px; font-weight: bold; padding: 6px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); font-family: 'Courier New', monospace; letter-spacing: 1px; z-index: 999; user-select: none;">
+    20 / 20
+</div>
+
+</body>
+</html>

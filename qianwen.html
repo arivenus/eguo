@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>千闻浏览器 · 搜索</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-container {
+            max-width: 820px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .home-page {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .home-page .logo {
+            font-size: 4.4rem;
+            font-weight: 800;
+            color: #1a5bbf;
+            letter-spacing: 10px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            user-select: none;
+            line-height: 1.1;
+        }
+
+        .home-page .logo .sub {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: #8aaccc;
+            letter-spacing: 14px;
+            display: block;
+            margin-top: -4px;
+        }
+
+        .home-page .logo .sub .dot {
+            color: #1a5bbf;
+            font-weight: 700;
+        }
+
+        .home-page .search-box {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border: 2px solid #e6edf8;
+            border-radius: 44px;
+            padding: 4px 6px 4px 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+            margin-top: 18px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .home-page .search-box:focus-within {
+            border-color: #1a5bbf;
+            box-shadow: 0 4px 28px rgba(26, 91, 191, 0.08);
+        }
+
+        .home-page .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1.05rem;
+            padding: 14px 8px 14px 0;
+            color: #1a2a3a;
+            background: transparent;
+            font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+            min-width: 0;
+        }
+
+        .home-page .search-box input::placeholder {
+            color: #b8cce0;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .home-page .search-box button {
+            background: #1a5bbf;
+            border: none;
+            color: #fff;
+            padding: 10px 32px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.25s;
+            font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+            flex-shrink: 0;
+            letter-spacing: 1.5px;
+        }
+
+        .home-page .search-box button:hover {
+            background: #0f4a9e;
+            transform: scale(1.02);
+            box-shadow: 0 4px 16px rgba(26, 91, 191, 0.20);
+        }
+
+        .home-page .search-box button:active {
+            transform: scale(0.96);
+        }
+
+        .home-page .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 28px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+
+        .home-page .nav-links a {
+            color: #5a7a9a;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: 0.2s;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .home-page .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #1a5bbf;
+            transition: 0.25s;
+        }
+
+        .home-page .nav-links a:hover {
+            color: #1a5bbf;
+        }
+
+        .home-page .nav-links a:hover::after {
+            width: 60%;
+        }
+
+        .home-page .nav-links .divider {
+            color: #d4e1f5;
+            font-weight: 100;
+        }
+
+        .result-page {
+            display: none;
+            padding: 10px 0;
+        }
+
+        .result-page .result-stats {
+            font-size: 0.85rem;
+            color: #7f99bc;
+            padding: 12px 0 16px 0;
+            border-bottom: 1px solid #eef2f7;
+            margin-bottom: 20px;
+        }
+
+        .result-page .result-stats .query-highlight {
+            color: #1a2a3a;
+            font-weight: 600;
+        }
+
+        .result-item {
+            display: block;
+            padding: 16px 18px;
+            margin-bottom: 6px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.2s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .result-item:hover {
+            background: #f5f9ff;
+            border-color: #e6edf8;
+        }
+
+        .result-item .title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a5bbf;
+            margin-bottom: 4px;
+        }
+
+        .result-item .url {
+            font-size: 0.78rem;
+            color: #27ae60;
+            margin-bottom: 4px;
+        }
+
+        .result-item .desc {
+            font-size: 0.9rem;
+            color: #3a5a7a;
+            line-height: 1.6;
+        }
+
+        .result-item .desc .highlight {
+            background: #fdf6b0;
+            padding: 0 2px;
+        }
+
+        .result-item .tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .result-item .tags span {
+            font-size: 0.7rem;
+            color: #7f99bc;
+            background: #f0f4fa;
+            padding: 2px 14px;
+            border-radius: 30px;
+        }
+
+        .no-result {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7f99bc;
+        }
+
+        .no-result .icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        .no-result .suggest {
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        .result-page .back-home {
+            display: inline-block;
+            margin-top: 20px;
+            color: #1a5bbf;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .result-page .back-home:hover {
+            color: #0f3d7a;
+            text-decoration: underline;
+        }
+
+        .footer-info {
+            text-align: center;
+            padding: 30px 0 16px;
+            font-size: 0.7rem;
+            color: #c0d0e0;
+            letter-spacing: 3px;
+            font-weight: 300;
+            border-top: 1px solid #eef2f7;
+            margin-top: 20px;
+        }
+
+        .footer-info .sep {
+            color: #dce6f0;
+            margin: 0 6px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 14px;
+            }
+            .home-page .logo {
+                font-size: 3rem;
+                letter-spacing: 6px;
+            }
+            .home-page .logo .sub {
+                font-size: 0.65rem;
+                letter-spacing: 8px;
+            }
+            .home-page .search-box {
+                padding: 4px 4px 4px 16px;
+                border-radius: 36px;
+            }
+            .home-page .search-box input {
+                font-size: 0.95rem;
+                padding: 12px 4px 12px 0;
+            }
+            .home-page .search-box button {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            .home-page .nav-links {
+                gap: 14px;
+            }
+            .home-page .nav-links a {
+                font-size: 0.8rem;
+            }
+            .result-item {
+                padding: 14px 12px;
+            }
+            .result-item .title {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .home-page .logo {
+                font-size: 2.4rem;
+                letter-spacing: 4px;
+            }
+            .home-page .logo .sub {
+                font-size: 0.55rem;
+                letter-spacing: 6px;
+            }
+            .home-page .search-box input {
+                font-size: 0.85rem;
+                padding: 10px 4px 10px 0;
+            }
+            .home-page .search-box button {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+            }
+            .home-page .nav-links {
+                gap: 10px;
+            }
+            .home-page .nav-links a {
+                font-size: 0.72rem;
+            }
+            .home-page .nav-links .divider {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+
+        <div class="home-page" id="homePage">
+            <div class="logo">
+                千闻
+                <span class="sub">QIANWEN <span class="dot">·</span> 搜索</span>
+            </div>
+            <form class="search-box" id="searchForm" autocomplete="off">
+                <input type="text" id="searchInput" placeholder="搜你想知道的..." autofocus />
+                <button type="submit">搜索</button>
+            </form>
+            <div class="nav-links">
+                <a href="#">新闻</a>
+                <span class="divider">|</span>
+                <a href="#">地图</a>
+                <span class="divider">|</span>
+                <a href="#">百科</a>
+                <span class="divider">|</span>
+                <a href="#">图片</a>
+                <span class="divider">|</span>
+                <a href="#">视频</a>
+                <span class="divider">|</span>
+                <a href="#">学术</a>
+            </div>
+        </div>
+
+        <div class="result-page" id="resultPage">
+            <div class="result-stats" id="resultStats">找到约 <span class="query-highlight" id="resultCount">0</span> 条结果</div>
+            <div id="resultList"></div>
+            <a href="#" class="back-home" id="backHome">← 返回首页</a>
+        </div>
+
+        <div class="footer-info">
+            千闻浏览器 <span class="sep">·</span> 简洁搜索
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 🟢 关键词和搜索结果
+        // ============================================================
+        const searchData = {
+
+            '锦禾市青平一中': {
+                results: [
+                    {
+                        title: '锦禾市青平一中官网',
+                        url: 'qpyz.html',
+                    }
+                ]
+            },
+             '青平一中': {
+                results: [
+                    {
+                        title: '锦禾市青平一中官网',
+                        url: 'qpyz.html',
+                    }
+                ]
+            },
+
+              '被钱压下的案子': {
+                results: [
+                    {
+                        title: '宁山井家案：母亲家中去世，父子失踪多年',
+                        url: 'jingjiaan.html',
+                    }
+                ]
+            },
+
+
+             '奚永振': {
+                results: [
+                    {
+                        title: '永振建筑公司创始人与妻子雨夜坠崖案',
+                        url: 'zhuiya.html',
+                    }
+                ]
+            },
+
+            '奚铭': {
+                results: [
+                    {
+                        title: '永振建筑公司发展历程',
+                        url: 'yzjzgs.html',
+                        desc: '从2009年奚永振创立永振建筑，到2018年逝世，再到2022年长子奚铭继承家业。一部关于传承与坚守的建筑企业史。',
+                    }
+                ]
+            },
+
+            '法堂教': {
+                results: [
+                    {
+                        title: '法堂之下· 因果不空',
+                        url: 'jiaoyi.html',
+                        desc: '',
+                    }
+                ]
+            },
+
+
+            '宁山古庙': {
+                results: [
+                    {
+                        title: '宁山旅游区官方通告',
+                        url: 'tongzhi.html',
+                                           }
+                ]
+            },
+
+            // ============================================================
+            // 🟢 搜索"宁山" → 两条结果
+            // ============================================================
+            '宁山': {
+                results: [
+                    {
+                        title: '宁山旅游风景区宣传',
+                        url: 'nsfjq.html',
+                        desc: '宁山 · 一山藏万象。云海、竹林、溪谷、星空——四时之景不同，而乐亦无穷也。',
+                    },
+                    {
+                        title: '锦禾市论坛',
+                        url: 'luntan.html',
+                        desc: '锦禾市本地论坛，汇聚城市资讯、民生讨论、兴趣圈子。',
+                    }
+                ]
+            }
+
+        };
+
+        // ============================================================
+        // DOM 引用
+        // ============================================================
+        const homePage = document.getElementById('homePage');
+        const resultPage = document.getElementById('resultPage');
+        const resultList = document.getElementById('resultList');
+        const resultCount = document.getElementById('resultCount');
+        const searchForm = document.getElementById('searchForm');
+        const searchInput = document.getElementById('searchInput');
+        const backHome = document.getElementById('backHome');
+
+        // ============================================================
+        // 搜索逻辑
+        // ============================================================
+        function performSearch(query) {
+            query = query.trim();
+            if (!query) return;
+
+            const data = searchData[query];
+
+            homePage.classList.add('hidden');
+            resultPage.style.display = 'block';
+
+            if (data && data.results && data.results.length > 0) {
+                resultCount.textContent = data.results.length;
+                resultList.innerHTML = data.results.map((item) => {
+                    const desc = item.desc ? item.desc.replace(new RegExp(query, 'g'), '<span class="highlight">' + query + '</span>') : '';
+                    const tagsHtml = item.tags ? item.tags.map(t => '<span>' + t + '</span>').join('') : '';
+                    return `
+                        <a href="${item.url}" target="_blank" class="result-item">
+                            <div class="title">${item.title}</div>
+                            <div class="url">${item.url}</div>
+                            ${desc ? '<div class="desc">' + desc + '</div>' : ''}
+                            ${tagsHtml ? '<div class="tags">' + tagsHtml + '</div>' : ''}
+                        </a>
+                    `;
+                }).join('');
+            } else {
+                resultCount.textContent = '0';
+                resultList.innerHTML = `
+                    <div class="no-result">
+                        <div class="icon">🔍</div>
+                        <div style="font-size:1.1rem;font-weight:500;color:#1a2a3a;">没有找到相关内容</div>
+                        <div class="suggest">试试其他关键词，或检查输入是否有误</div>
+                    </div>
+                `;
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================================
+        // 事件绑定
+        // ============================================================
+
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            performSearch(searchInput.value);
+        });
+
+        backHome.addEventListener('click', function(e) {
+            e.preventDefault();
+            homePage.classList.remove('hidden');
+            resultPage.style.display = 'none';
+            searchInput.value = '';
+            searchInput.focus();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ============================================================
+        // 初始化
+        // ============================================================
+        homePage.classList.remove('hidden');
+        resultPage.style.display = 'none';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const q = urlParams.get('q');
+        if (q) {
+            searchInput.value = q;
+            performSearch(q);
+        }
+    </script>
+<!-- 独立页码小标 -->
+<div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); color: #ffffff; font-size: 13px; font-weight: bold; padding: 6px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); font-family: 'Courier New', monospace; letter-spacing: 1px; z-index: 999; user-select: none;">
+    4 / 20
+</div>
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>恶果 · 引导页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f7;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, system-ui, -apple-system, sans-serif;
+            padding: 1.5rem;
+            margin: 0;
+            color: #1a1f2b;
+        }
+
+        .game-container {
+            max-width: 780px;
+            width: 100%;
+            background: #f6f9fe;
+            background-image: radial-gradient(circle at 20% 30%, rgba(200, 220, 250, 0.3) 0%, transparent 60%);
+            border-radius: 2.5rem;
+            padding: 2.2rem 2rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(60, 80, 120, 0.10);
+            backdrop-filter: blur(2px);
+            transition: all 0.2s;
+            border: 1px solid rgba(200, 210, 230, 0.4);
+        }
+
+        /* 标题区 */
+        .game-title {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-align: center;
+            color: #1d2b3f;
+            text-shadow: 0 0 8px rgba(60, 100, 200, 0.15), 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-bottom: 0.2rem;
+            line-height: 1.1;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            word-break: keep-all;
+        }
+        .game-title small {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            opacity: 0.6;
+            display: block;
+            font-weight: 300;
+            margin-top: -0.2rem;
+            color: #3a4a66;
+        }
+
+        /* 日期 */
+        .story-date {
+            text-align: right;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #3f5070;
+            letter-spacing: 1px;
+            padding-right: 0.3rem;
+            border-bottom: 1px dashed #b8c9e0;
+            padding-bottom: 0.6rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* 正文段落 — 黑色文字 */
+        .story-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            letter-spacing: 0.02em;
+            color: #141a26;
+            margin-bottom: 1.6rem;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .story-text p {
+            margin-bottom: 1.2rem;
+        }
+
+        .story-text p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* 高亮定制 — 浅色背景下更鲜明 */
+        .highlight-blue {
+            color: #1a5bd6;
+            font-weight: 700;
+            font-size: 1.15em;
+            text-shadow: 0 0 10px rgba(40, 100, 255, 0.15);
+            letter-spacing: 0.3px;
+        }
+        .highlight-red {
+            color: #d63a4f;
+            font-weight: 700;
+            font-size: 1.15em;
+            text-shadow: 0 0 10px rgba(210, 50, 70, 0.12);
+        }
+        .highlight-green {
+            color: #1b8f5a;
+            font-weight: 700;
+            font-size: 1.15em;
+            text-shadow: 0 0 10px rgba(30, 160, 90, 0.12);
+        }
+
+        /* 特殊标注——名字放大 */
+        .name-xl {
+            font-size: 1.3em;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* 卡片占位 - 浅色背景 + 深色文字 (与整体一致) */
+        .link-placeholder {
+            display: inline-block;
+            background: #e3ecf9;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            border: 1px solid #b6cbdf;
+            color: #111a2a;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            margin: 0 0.1rem;
+            transition: 0.1s;
+            cursor: default;
+            background: #e3ecf9;
+            border-color: #a5bedb;
+            color: #0c1422;
+            font-family: 'Courier New', monospace;
+        }
+
+        .link-placeholder i {
+            font-style: normal;
+            opacity: 0.6;
+            margin-right: 0.3rem;
+        }
+
+        .link-placeholder::after {
+            content: " 🔗";
+            opacity: 0.4;
+            font-size: 0.8rem;
+            margin-left: 0.2rem;
+        }
+
+        /* 特殊卡片块 - 浅色背景 + 深色文字 */
+        .special-block {
+            background: #e3ecf9;
+            border-left: 4px solid #1b8f5a;
+            padding: 0.8rem 1.3rem;
+            margin: 1.2rem 0 1rem 0;
+            border-radius: 0 14px 14px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            font-weight: 400;
+            color: #101826;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.2rem 0.6rem;
+            border: 1px solid #c5d7ec;
+            border-left-width: 4px;
+        }
+
+        .special-block .label {
+            color: #1f2f4a;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .special-block .highlight-green {
+            color: #16734a;
+            text-shadow: 0 0 6px rgba(30, 160, 90, 0.15);
+            font-weight: 700;
+        }
+
+        /* 社交卡片微调 */
+        .special-block.social-block {
+            border-left-color: #1a5bd6;
+        }
+
+        .special-block.social-block .highlight-blue {
+            color: #164bb3;
+            text-shadow: 0 0 6px rgba(40, 100, 255, 0.12);
+        }
+
+        .special-block .link-placeholder {
+            background: #f0f6fe;
+            border-color: #a5bedb;
+            color: #0c1422;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .divider-dash {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b8cbe0, transparent);
+            margin: 1.2rem 0 1.5rem 0;
+            opacity: 0.6;
+        }
+
+        /* 底部声明 - 深色文字 */
+        .footer-disclaimer {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #cbd9eb;
+            font-size: 0.85rem;
+            color: #465a78;
+            letter-spacing: 0.8px;
+            font-weight: 400;
+            opacity: 0.8;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        /* 手机适配 */
+        @media (max-width: 550px) {
+            .game-container {
+                padding: 1.8rem 1.2rem;
+            }
+            .game-title {
+                font-size: 3rem;
+                letter-spacing: 4px;
+            }
+            .story-text {
+                font-size: 0.98rem;
+                line-height: 1.7;
+            }
+            .highlight-blue, .highlight-red, .highlight-green {
+                font-size: 1.05em;
+            }
+            .name-xl {
+                font-size: 1.2em;
+            }
+            .special-block {
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .game-title {
+                font-size: 2.5rem;
+            }
+            .game-container {
+                padding: 1.2rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- 游戏名 -->
+        <div class="game-title">
+            恶果
+            <small>· 溯因</small>
+        </div>
+
+        <!-- 日期 -->
+        <div class="story-date">2026.4.17</div>
+
+        <!-- 正文 -->
+        <div class="story-text">
+            <p>
+                你叫 <span class="highlight-blue name-xl">奚铭</span>，男，是一家建筑公司的老板。<br>
+                原本你有一个幸福的家庭，家里经营着一家建筑公司，收入稳定，父母恩爱和睦，还有一个可爱的妹妹。
+            </p>
+            <p>
+                直到八年前的一个暴雨天，父母在去建设工地的途中，车子打滑不慎摔入悬崖，只留下年少的你与六岁的妹妹相依为命。
+            </p>
+            <p>
+                多年后，大学毕业的你继承了父亲一手创办的公司，因为忙于事业，你和妹妹虽然同住屋檐下，但交流却越来越少。<br>
+                那天，像往常一样在公司工作的你接到了一通电话——
+            </p>
+            <p>
+                对方自称是辖区民警，说你的妹妹 <span class="highlight-blue name-xl">奚悦</span> 在家里阳台 <span class="highlight-red">坠楼</span> 了，要你马上赶来。<br>
+                你慌张的赶回家，只见妹妹被蒙上一层白布抬上担架带走。<br>
+                调查结果很快出来了，一切证据表明，你的妹妹是 <span class="highlight-red">自杀</span>。
+            </p>
+            <p>
+                失魂落魄的你回到家，不停的用酒精麻痹自己，就这样浑浑噩噩的过了两天。<br>
+                醒酒后的你逐渐冷静下来，认为一向没有什么异常的妹妹突然 <span class="highlight-red">自杀</span>，背后一定发生了什么。<br>
+                可妹妹的手机当时被她拿在手里，<span class="highlight-red">坠楼</span> 时被摔得四分五裂，已经无法获得信息了。
+            </p>
+            <p>
+                于是你起身来到妹妹的房间，一番寻找之下，在抽屉里找到了一个笔记本，是妹妹的 <span class="highlight-green">日记</span>。
+            </p>
+            <!-- 日记卡片 -->
+     <a href="rj.html" target="_blank" style="text-decoration:none; display:block;">
+    <div class="special-block" style="cursor:pointer;">
+        <span class="label">📖 日记页面</span>
+        <span class="link-placeholder"><i>📓</i> 奚悦日记</span>
+    </div>
+</a>  </a>            <p>
+                看完妹妹的 <span class="highlight-green">日记</span>，你更加坚信妹妹身上一定发生了什么，你回到自己的房间，拿出笔记本电脑，你记得妹妹有个 <span class="highlight-green">社交账号</span>，或许从她的社交平台上，能够获得一些线索。
+            </p>
+
+            <!-- 社交卡片 -->
+            <div class="special-block social-block">
+                <span class="label">🌐 社交平台网站: https://arivenus.github.io/eguo/iTalk.html</span>
+                         </div>
+
+            <!-- 分割线 -->
+            <div class="divider-dash"></div>
+
+            <!-- 后文自然延续 -->
+            <p style="font-style: italic; color: #3a4c6a; opacity: 0.8; font-size: 0.95rem; margin-top: 0.5rem;">
+                — 你握紧笔记本，指尖微微发抖。有些答案，或许就藏在那些被忽略的日常里。
+            </p>
+        </div>
+  <!-- 页码卡片 -->
+     <a href="pages.html" target="_blank" style="text-decoration:none; display:block;">
+    <div class="special-block" style="cursor:pointer;">
+        <span class="label">🖊️ 游戏推理进度</span>
+        <span class="link-placeholder"><i></i> 🧩 页码梳理</span>
+    </div>
+</a> 
+        <!-- 底部声明 -->
+        <div class="footer-disclaimer">
+            本页面内容均为虚拟游戏，如有雷同，纯属巧合
+        </div>
+    </div>
+</body>
+</html>

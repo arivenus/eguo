@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法堂教 · 入教仪式</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Georgia', 'Times New Roman', '楷体', 'KaiTi', serif;
+            overflow: hidden;
+            position: relative;
+            background: #0a0503;
+        }
+
+        /* ===== 燃烧的火焰背景 ===== */
+        .fire-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(200, 50, 20, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 60%, rgba(220, 80, 30, 0.20) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 100%, rgba(180, 40, 10, 0.30) 0%, transparent 60%),
+                radial-gradient(ellipse at 30% 20%, rgba(160, 60, 20, 0.10) 0%, transparent 30%),
+                radial-gradient(ellipse at 70% 10%, rgba(200, 70, 30, 0.08) 0%, transparent 25%),
+                linear-gradient(180deg, #0a0503 0%, #1a0805 30%, #2a0a06 60%, #1a0503 100%);
+            animation: fireBreath 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes fireBreath {
+            0% { opacity: 0.7; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.02); }
+        }
+
+        /* ===== 动态火焰粒子层 ===== */
+        .fire-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .flame {
+            position: absolute;
+            bottom: -20px;
+            background: radial-gradient(ellipse at center, rgba(255, 120, 40, 0.15) 0%, rgba(200, 50, 10, 0.05) 60%, transparent 80%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: riseBurn linear infinite;
+            transform-origin: bottom center;
+        }
+
+        .flame:nth-child(1) { left: 10%; width: 120px; height: 180px; animation-duration: 5s; animation-delay: 0s; }
+        .flame:nth-child(2) { left: 25%; width: 80px; height: 140px; animation-duration: 6s; animation-delay: 1s; }
+        .flame:nth-child(3) { left: 40%; width: 160px; height: 220px; animation-duration: 4.5s; animation-delay: 0.5s; }
+        .flame:nth-child(4) { left: 55%; width: 100px; height: 160px; animation-duration: 5.5s; animation-delay: 2s; }
+        .flame:nth-child(5) { left: 70%; width: 140px; height: 200px; animation-duration: 4.8s; animation-delay: 1.5s; }
+        .flame:nth-child(6) { left: 85%; width: 90px; height: 130px; animation-duration: 6.2s; animation-delay: 3s; }
+        .flame:nth-child(7) { left: 5%; width: 60px; height: 100px; animation-duration: 7s; animation-delay: 0.8s; }
+        .flame:nth-child(8) { left: 48%; width: 70px; height: 120px; animation-duration: 5.2s; animation-delay: 2.5s; }
+        .flame:nth-child(9) { left: 92%; width: 110px; height: 170px; animation-duration: 4.2s; animation-delay: 1.2s; }
+        .flame:nth-child(10) { left: 15%; width: 50px; height: 90px; animation-duration: 8s; animation-delay: 3.5s; }
+        .flame:nth-child(11) { left: 62%; width: 130px; height: 190px; animation-duration: 5.8s; animation-delay: 0.3s; }
+        .flame:nth-child(12) { left: 33%; width: 45px; height: 80px; animation-duration: 6.8s; animation-delay: 4s; }
+
+        @keyframes riseBurn {
+            0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.6; }
+            25% { transform: translateY(-100px) scale(1.1) rotate(2deg); opacity: 0.8; }
+            50% { transform: translateY(-200px) scale(1.2) rotate(-2deg); opacity: 0.6; }
+            75% { transform: translateY(-300px) scale(0.9) rotate(1deg); opacity: 0.3; }
+            100% { transform: translateY(-450px) scale(0.5) rotate(-1deg); opacity: 0; }
+        }
+
+        /* ===== 火星/灰烬粒子 ===== */
+        .spark {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 180, 100, 0.6);
+            border-radius: 50%;
+            box-shadow: 0 0 6px rgba(255, 150, 80, 0.3);
+            animation: sparkFloat linear infinite;
+        }
+
+        .spark:nth-child(1) { left: 15%; top: 60%; animation-duration: 8s; animation-delay: 0s; width: 2px; height: 2px; }
+        .spark:nth-child(2) { left: 35%; top: 40%; animation-duration: 10s; animation-delay: 2s; width: 4px; height: 4px; }
+        .spark:nth-child(3) { left: 55%; top: 70%; animation-duration: 7s; animation-delay: 4s; width: 2px; height: 2px; }
+        .spark:nth-child(4) { left: 75%; top: 30%; animation-duration: 9s; animation-delay: 1s; width: 3px; height: 3px; }
+        .spark:nth-child(5) { left: 90%; top: 50%; animation-duration: 11s; animation-delay: 3s; width: 2px; height: 2px; }
+        .spark:nth-child(6) { left: 5%; top: 20%; animation-duration: 12s; animation-delay: 5s; width: 4px; height: 4px; }
+        .spark:nth-child(7) { left: 45%; top: 80%; animation-duration: 8.5s; animation-delay: 2.5s; width: 2px; height: 2px; }
+        .spark:nth-child(8) { left: 65%; top: 15%; animation-duration: 7.5s; animation-delay: 3.5s; width: 3px; height: 3px; }
+
+        @keyframes sparkFloat {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+            10% { opacity: 0.8; }
+            50% { transform: translateY(-200px) translateX(30px) scale(1.5); opacity: 0.4; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-500px) translateX(-20px) scale(0.5); opacity: 0; }
+        }
+
+        /* ===== 主容器 ===== */
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px 30px;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        /* ===== 法堂符号 ===== */
+        .symbol {
+            font-size: 5rem;
+            color: rgba(200, 100, 60, 0.12);
+            letter-spacing: 20px;
+            margin-bottom: 20px;
+            font-weight: 100;
+            user-select: none;
+            text-shadow: 0 0 60px rgba(200, 80, 50, 0.08);
+            animation: symbolPulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes symbolPulse {
+            0% { opacity: 0.3; letter-spacing: 20px; }
+            100% { opacity: 0.8; letter-spacing: 28px; }
+        }
+
+        /* ===== 主标题 ===== */
+        .main-title {
+            font-size: 3.8rem;
+            font-weight: 700;
+            color: #e8d0c0;
+            letter-spacing: 12px;
+            text-shadow: 
+                0 0 40px rgba(200, 80, 50, 0.10),
+                0 0 80px rgba(200, 80, 50, 0.05),
+                0 4px 20px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
+            line-height: 1.2;
+        }
+
+        .main-title .highlight {
+            color: #b84a2a;
+            text-shadow: 
+                0 0 50px rgba(200, 80, 40, 0.20),
+                0 0 100px rgba(200, 80, 40, 0.08);
+        }
+
+        /* ===== 分割线 ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0 30px 0;
+            opacity: 0.25;
+        }
+
+        .divider .line {
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(200, 150, 130, 0.3), transparent);
+        }
+
+        .divider .diamond {
+            font-size: 0.6rem;
+            color: rgba(200, 150, 130, 0.15);
+            letter-spacing: 4px;
+        }
+
+        /* ===== 副标题/教义（点击跳转） ===== */
+        .sub-title {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #c8b0a0;
+            letter-spacing: 6px;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            text-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            padding: 10px 30px;
+            border: 1px solid rgba(200, 150, 130, 0.08);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.20);
+            backdrop-filter: blur(4px);
+            position: relative;
+        }
+
+        .sub-title:hover {
+            color: #e8d0c0;
+            border-color: rgba(200, 150, 130, 0.20);
+            background: rgba(0, 0, 0, 0.30);
+            text-shadow: 0 0 50px rgba(200, 100, 60, 0.06);
+            transform: scale(1.02);
+        }
+
+        .sub-title::after {
+            content: '▶';
+            font-size: 0.6rem;
+            opacity: 0.3;
+            margin-left: 12px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .sub-title:hover::after {
+            opacity: 0.8;
+            transform: translateX(4px);
+        }
+
+        /* ===== 底部文字 ===== */
+        .footer-text {
+            margin-top: 40px;
+            font-size: 0.75rem;
+            color: #ffffff;
+            letter-spacing: 10px;
+            font-weight: 300;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(200, 100, 60, 0.08);
+            opacity: 0.6;
+        }
+
+        .footer-text .sep {
+            color: rgba(200, 150, 130, 0.15);
+            margin: 0 4px;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.4rem;
+                letter-spacing: 6px;
+            }
+            .sub-title {
+                font-size: 1.3rem;
+                letter-spacing: 4px;
+                padding: 8px 20px;
+            }
+            .symbol {
+                font-size: 3.5rem;
+            }
+            .container {
+                padding: 20px 16px;
+            }
+            .flame {
+                transform: scale(0.6);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.8rem;
+                letter-spacing: 4px;
+            }
+            .sub-title {
+                font-size: 1rem;
+                letter-spacing: 2px;
+                padding: 6px 14px;
+            }
+            .symbol {
+                font-size: 2.5rem;
+            }
+            .footer-text {
+                font-size: 0.6rem;
+                letter-spacing: 6px;
+            }
+            .flame {
+                transform: scale(0.4);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 燃烧的火焰背景 ===== -->
+    <div class="fire-bg"></div>
+
+    <!-- ===== 火焰粒子层 ===== -->
+    <div class="fire-particles">
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+    </div>
+
+    <!-- ===== 火星/灰烬 ===== -->
+    <div class="fire-particles">
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+    </div>
+
+    <!-- ===== 主内容 ===== -->
+    <div class="container">
+
+        <!-- 符号 -->
+        <div class="symbol">✧ ✦ ✧</div>
+
+        <!-- 主标题 -->
+        <div class="main-title">
+            欢迎您加入<br>
+            <span class="highlight">法堂教</span>
+        </div>
+
+        <!-- 分割线 -->
+        <div class="divider">
+            <span class="line"></span>
+            <span class="diamond">◆</span>
+            <span class="line"></span>
+        </div>
+
+        <!-- 副标题（点击跳转） -->
+        <a href="fatang.html" style="text-decoration: none;">
+            <div class="sub-title">
+                法堂之下 · 因果不空
+            </div>
+        </a>
+
+        <!-- 底部文字（白色） -->
+        <div class="footer-text">
+            信 <span class="sep">·</span> 仰 <span class="sep">·</span> 即 <span class="sep">·</span> 命 <span class="sep">·</span> 运
+        </div>
+
+    </div>
+<!-- 独立页码小标 -->
+<div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); color: #ffffff; font-size: 13px; font-weight: bold; padding: 6px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); font-family: 'Courier New', monospace; letter-spacing: 1px; z-index: 999; user-select: none;">
+    12 / 20
+</div>
+
+</body>
+</html>

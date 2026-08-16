@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奚悦 · 日记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #2c1810;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            font-family: 'Georgia', 'Times New Roman', '楷体', 'KaiTi', serif;
+        }
+
+        .diary-container {
+            max-width: 720px;
+            width: 100%;
+            background: #f5efe6;
+            background-image: 
+                radial-gradient(ellipse at 20% 30%, rgba(235, 215, 190, 0.3) 0%, transparent 60%),
+                linear-gradient(180deg, #f5efe6 0%, #e8ddd0 100%);
+            border-radius: 18px;
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.6),
+                0 0 0 2px #8b7355,
+                0 0 0 6px #d4c4b0,
+                0 0 0 8px #8b7355;
+            padding: 30px 28px 28px;
+            position: relative;
+            min-height: 560px;
+        }
+
+        .diary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 14px;
+            border-bottom: 2px dashed #c4b09a;
+            margin-bottom: 18px;
+        }
+
+        .diary-header .title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4a2f1f;
+            letter-spacing: 4px;
+            font-family: 'Georgia', serif;
+        }
+
+        .diary-header .page-indicator {
+            font-size: 0.9rem;
+            color: #8a7a6a;
+            background: #e8ddd0;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+
+        .diary-content {
+            font-size: 1.05rem;
+            line-height: 2;
+            color: #2a1f16;
+            min-height: 380px;
+            padding: 6px 8px 10px 8px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-family: 'Georgia', '楷体', 'KaiTi', serif;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-content {
+            display: none;
+            width: 100%;
+            animation: fadePage 0.35s ease;
+            padding: 4px 0;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        @keyframes fadePage {
+            0% { opacity: 0.4; transform: translateX(12px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        .highlight-red {
+            color: #c0392b;
+            font-weight: 700;
+        }
+
+        .diary-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 2px dashed #c4b09a;
+        }
+
+        .page-btn {
+            background: #d4c4b0;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #3d281c;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+        }
+
+        .page-btn:hover {
+            background: #c4b09a;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .page-btn:active {
+            transform: scale(0.96);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .page-btn:disabled:hover {
+            background: #d4c4b0;
+            transform: none;
+        }
+
+        .page-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 200px;
+        }
+
+        .page-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbb9a6;
+            transition: 0.25s;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .page-dots span.active-dot {
+            background: #7a5f4a;
+            transform: scale(1.25);
+            box-shadow: 0 0 8px rgba(90, 60, 40, 0.25);
+        }
+
+        .diary-watermark {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 0.7rem;
+            color: #b8a692;
+            letter-spacing: 2px;
+            font-style: italic;
+        }
+
+        @media (max-width: 580px) {
+            .diary-container {
+                padding: 18px 16px 20px;
+                min-height: 460px;
+            }
+            .diary-header .title {
+                font-size: 1.1rem;
+                letter-spacing: 2px;
+            }
+            .diary-content {
+                font-size: 0.95rem;
+                line-height: 1.9;
+                min-height: 300px;
+                padding: 4px 4px 6px 4px;
+            }
+            .page-btn {
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+            .diary-header .page-indicator {
+                font-size: 0.75rem;
+                padding: 3px 12px;
+            }
+            .page-dots span {
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .diary-container {
+                padding: 14px 10px 16px;
+                min-height: 400px;
+            }
+            .diary-content {
+                font-size: 0.88rem;
+                line-height: 1.8;
+                min-height: 260px;
+            }
+            .page-btn {
+                padding: 6px 14px;
+                font-size: 0.78rem;
+            }
+            .diary-header .title {
+                font-size: 0.95rem;
+            }
+            .page-dots {
+                max-width: 120px;
+            }
+            .page-dots span {
+                width: 6px;
+                height: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="diary-container">
+
+    <div class="diary-header">
+        <span class="title"> 奚悦 · 日记</span>
+        <span class="page-indicator" id="pageIndicator">1 / 1</span>
+    </div>
+
+    <div class="diary-content" id="diaryContent"></div>
+
+    <div class="diary-footer">
+        <button class="page-btn" id="prevBtn">◀ 上一页</button>
+        <div class="page-dots" id="pageDots"></div>
+        <button class="page-btn" id="nextBtn">下一页 ▶</button>
+    </div>
+
+    <div class="diary-watermark">—— 奚悦 · 日记 ——</div>
+</div>
+
+<script>
+    // ============================================================
+    // 日记条目 — 严格按照您给的顺序，日期在上，内容在下
+    // 每条独立一页
+    // ============================================================
+    const diaryEntries = [
+        // 第1页
+        `2022.1.6
+
+从箱子里翻出了以前哭着朝妈妈要的漂亮本子，没想到买回来就压箱底了，那我就用来写日记吧。`,
+
+        // 第2页
+        `2022.1.10
+
+听同学聊天才知道，林海公园翻新重建了一个新的游乐场，妈妈以前经常带我去那边玩，放学回家和哥哥说，哥哥说周末带我去玩！`,
+
+        // 第3页
+        `2022.1.15
+
+哥哥说公司有事，不能去游乐场了。`,
+
+        // 第4页
+        `2022.1.17
+
+家里好安静啊，以前明明很热闹的。`,
+
+        // 第5页
+        `2022.1.19
+
+数学考了全班第三，可是没有得到老师的夸奖，是因为我还不够努力吗？`,
+
+        // 第6页
+        `2022.2.13
+
+跟哥哥说想休学，哥哥说了我一顿，我讨厌他，他一点都不理解我。`,
+
+        // 第7页
+        `2022.4.8
+
+爸爸妈妈不在了，哥哥也是大忙人，除了我以外没有人记得今天是我十三岁的生日……`,
+
+        // 第8页
+        `2022.5.10
+
+上课答错了问题，被老师说了，大家都在笑。`,
+
+        // 第9页
+        `2022.10.17
+
+又到了你们离开的日子……悦悦想你们了……`,
+
+        // 第10页
+        `2022.12.3
+
+为什么没有人能陪陪我呢……`,
+
+        // 第11页
+        `2023.1.26
+
+这种日子什么时候能结束，过得好煎熬。`,
+
+        // 第12页
+        `2023.3.16
+
+体育课大家都成双成对的，只有我是一个人，我想回家……`,
+
+        // 第13页
+        `2023.3.25
+
+放假了，哥哥没空陪我，也没有人和我出去玩，只能坐在阳台发呆。`,
+
+        // 第14页
+        `2023.4.19
+
+我感觉他们在议论我……我不想上学。`,
+
+        // 第15页
+        `2023.5.9
+
+今天和同学起了争执，明明是她的错，可是大家都帮她说话，好烦。`,
+
+        // 第16页
+        `2023.5.29
+
+他们笑的声音好吵……到底有什么值得那么开心。`,
+
+        // 第17页
+        `2023.7.28
+
+我感觉自己快要疯了。`,
+
+        // 第18页
+        `2024.3.5
+
+我的家变得不像家了。`,
+
+        // 第19页
+        `2024.5.23
+
+哥哥又加班，家里天天只有我一个人。`,
+
+        // 第20页
+        `2024.6.7
+
+老师和同学们好像都不太喜欢我，也对，我的性格连我自己也不喜欢，可是我以前不是这样的……`,
+
+        // 第21页
+        `2024.7.10
+
+加班加班又加班，他的眼里只有工作，根本没有我这个妹妹。`,
+
+        // 第22页
+        `2024.8.6
+
+和我哥吵了一架，他说他对不起我。爸妈走了这么多年，他养我长大不容易，我知道的，我原谅他了。`,
+
+        // 第23页
+        `2024.11.24
+
+我有朋友了。`,
+
+        // 第24页
+        `2024.12.23
+
+好开心。`,
+
+        // 第25页
+        `2025.1.29
+
+我们有好多共同爱好。`,
+
+        // 第26页
+        `2025.2.13
+
+今天下了好大的雨，外边一直在打雷，他问我要不要一起听歌。虽然以前我也会在下雨的时候听歌，但是这次的感觉好奇怪。是因为有人陪吗？`,
+
+        // 第27页
+        `2025.4.6
+
+我开始相信缘分了。`,
+
+        // 第28页
+        `2025.7.18
+
+和他聊天就想不起来写日记了。`,
+
+        // 第29页
+        `2025.8.15
+
+……`,
+
+        // 第30页
+        `2025.11.16
+
+好痛苦……`,
+
+        // 第31页
+        `2026.3.19
+
+幸好我还有你……`,
+
+        // 第32页 — 全部红色“为什么”
+        ` 2026.4.16   <span class="highlight-red">
+
+为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么</span>`
+    ];
+
+    // ============================================================
+    // 渲染
+    // ============================================================
+    const contentContainer = document.getElementById('diaryContent');
+    const dotsContainer = document.getElementById('pageDots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const pageIndicator = document.getElementById('pageIndicator');
+
+    let currentPage = 0;
+    const totalPages = diaryEntries.length;
+
+    diaryEntries.forEach((text, index) => {
+        const div = document.createElement('div');
+        div.className = 'page-content';
+        if (index === 0) div.classList.add('active');
+        div.innerHTML = text;
+        contentContainer.appendChild(div);
+    });
+
+    for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement('span');
+        if (i === 0) dot.classList.add('active-dot');
+        dot.dataset.index = i;
+        dot.addEventListener('click', function() {
+            goToPage(parseInt(this.dataset.index));
+        });
+        dot.style.cursor = 'pointer';
+        dotsContainer.appendChild(dot);
+    }
+
+    const pages = document.querySelectorAll('.page-content');
+    const dots = document.querySelectorAll('#pageDots span');
+
+    function goToPage(index) {
+        if (index < 0) index = 0;
+        if (index >= totalPages) index = totalPages - 1;
+        if (index === currentPage) return;
+
+        currentPage = index;
+
+        pages.forEach((page, i) => {
+            page.classList.toggle('active', i === currentPage);
+        });
+
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active-dot', i === currentPage);
+        });
+
+        pageIndicator.textContent = (currentPage + 1) + ' / ' + totalPages;
+        prevBtn.disabled = (currentPage === 0);
+        nextBtn.disabled = (currentPage === totalPages - 1);
+    }
+
+    prevBtn.addEventListener('click', function() {
+        if (currentPage > 0) goToPage(currentPage - 1);
+    });
+
+    nextBtn.addEventListener('click', function() {
+        if (currentPage < totalPages - 1) goToPage(currentPage + 1);
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            if (currentPage > 0) goToPage(currentPage - 1);
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            if (currentPage < totalPages - 1) goToPage(currentPage + 1);
+        }
+    });
+
+    let touchStartX = 0;
+    const container = document.querySelector('.diary-container');
+    container.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    container.addEventListener('touchend', function(e) {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 40) {
+            if (diff > 0 && currentPage < totalPages - 1) {
+                goToPage(currentPage + 1);
+            } else if (diff < 0 && currentPage > 0) {
+                goToPage(currentPage - 1);
+            }
+        }
+    }, { passive: true });
+
+    goToPage(0);
+</script>
+
+<!-- 独立页码小标 -->
+<div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); color: #ffffff; font-size: 13px; font-weight: bold; padding: 6px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); font-family: 'Courier New', monospace; letter-spacing: 1px; z-index: 999; user-select: none;">
+    1 / 20
+</div>
+
+</body>
+</html>

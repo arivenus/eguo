@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>永振建筑 · 公司发展史</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Microsoft YaHei', system-ui, sans-serif;
+            color: #1a2a3a;
+            line-height: 1.7;
+        }
+
+        .top-nav {
+            background: #0f2b4a;
+            color: #b8d0e8;
+            padding: 6px 40px;
+            font-size: 0.78rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+            border-bottom: 1px solid #1a3a5a;
+        }
+
+        .top-nav .left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .top-nav .left i {
+            margin-right: 4px;
+        }
+
+        .top-nav .right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .top-nav .right a {
+            color: #b8d0e8;
+            text-decoration: none;
+            font-size: 0.78rem;
+            transition: 0.2s;
+        }
+
+        .top-nav .right a:hover {
+            color: #ffffff;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f9ff 100%);
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #1a5bbf;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .header .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #1a5bbf, #0f3d7a);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Georgia', serif;
+            flex-shrink: 0;
+        }
+
+        .header .logo-icon img {
+            border-radius: 12px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .header .company-name h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0f2b4a;
+            letter-spacing: 2px;
+        }
+
+        .header .company-name .sub {
+            font-size: 0.75rem;
+            color: #5a7a9a;
+            letter-spacing: 3px;
+        }
+
+        .header .quick-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .header .quick-links a {
+            background: #eaf1fc;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #1a5bbf;
+            text-decoration: none;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .header .quick-links a:hover {
+            background: #d4e2fc;
+        }
+
+        .main-nav {
+            background: #0f2b4a;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .main-nav .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+
+        .main-nav .nav-links a {
+            color: #d0e0f0;
+            text-decoration: none;
+            padding: 12px 22px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.2s;
+            border-bottom: 3px solid transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .main-nav .nav-links a:hover {
+            color: #ffffff;
+            border-bottom-color: #4a9eff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .main-nav .nav-links a.active {
+            color: #ffffff;
+            border-bottom-color: #4a9eff;
+        }
+
+        .main-nav .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .main-nav .nav-right .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.10);
+            border-radius: 30px;
+            padding: 4px 16px 4px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .main-nav .nav-right .search-box input {
+            background: transparent;
+            border: none;
+            padding: 6px 8px 6px 0;
+            color: #ffffff;
+            font-size: 0.85rem;
+            outline: none;
+            width: 120px;
+        }
+
+        .main-nav .nav-right .search-box input::placeholder {
+            color: #8aaccc;
+        }
+
+        .main-nav .nav-right .search-box i {
+            color: #8aaccc;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb {
+            max-width: 1100px;
+            margin: 18px auto 0;
+            padding: 0 24px;
+            font-size: 0.82rem;
+            color: #7f99bc;
+        }
+
+        .breadcrumb a {
+            color: #1a5bbf;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 18px auto 32px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 28px;
+        }
+
+        .main-content {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 32px 36px 28px;
+            box-shadow: 0 2px 12px rgba(0, 20, 40, 0.04);
+            border: 1px solid #e6edf8;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0f2b4a;
+            letter-spacing: 1px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #1a5bbf;
+            margin-bottom: 20px;
+        }
+
+        .page-title small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #7f99bc;
+            letter-spacing: 2px;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .company-intro {
+            background: #f5f9ff;
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 24px;
+            border-left: 4px solid #1a5bbf;
+            font-size: 0.95rem;
+            color: #2a4a6a;
+            line-height: 1.8;
+        }
+
+        .company-intro strong {
+            color: #0f2b4a;
+        }
+
+        .timeline-section {
+            margin-bottom: 24px;
+        }
+
+        .timeline-year {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 4px;
+        }
+
+        .timeline-year .year {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f2b4a;
+            font-family: 'Georgia', serif;
+            flex-shrink: 0;
+            min-width: 80px;
+        }
+
+        .timeline-year .year-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, #d4e1f5, transparent);
+        }
+
+        .timeline-year .label {
+            font-size: 0.8rem;
+            color: #7f99bc;
+            font-weight: 500;
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        .timeline-body {
+            font-size: 0.93rem;
+            color: #1a2a3a;
+            padding-left: 94px;
+            text-indent: 2em;
+        }
+
+        .timeline-body .quote {
+            display: block;
+            padding: 8px 16px 8px 22px;
+            margin: 8px 0 6px 0;
+            border-left: 3px solid #1a5bbf;
+            background: #f5f9ff;
+            font-style: italic;
+            color: #3a5a7a;
+            font-size: 0.9rem;
+            text-indent: 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .timeline-body .quote .author {
+            display: block;
+            text-align: right;
+            font-size: 0.8rem;
+            color: #7f99bc;
+            font-style: normal;
+            margin-top: 2px;
+        }
+
+        .project-section {
+            margin-top: 8px;
+        }
+
+        .project-section .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f2b4a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-section .section-title i {
+            color: #1a5bbf;
+        }
+
+        .project-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        .project-table th {
+            background: #f0f4fa;
+            color: #0f2b4a;
+            font-weight: 600;
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 2px solid #d4e1f5;
+        }
+
+        .project-table td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #ecf2fa;
+        }
+
+        .project-table tr:hover td {
+            background: #f8fbff;
+        }
+
+        .project-table .remark {
+            font-size: 0.78rem;
+            color: #7f99bc;
+        }
+
+        .spirit-box {
+            background: #f5f9ff;
+            border: 2px solid #d4e1f5;
+            border-radius: 12px;
+            padding: 20px 28px;
+            margin: 20px 0 10px 0;
+            text-align: center;
+        }
+
+        .spirit-box .spirit-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0f2b4a;
+            letter-spacing: 8px;
+            font-family: 'Georgia', serif;
+        }
+
+        .spirit-box .spirit-text .highlight {
+            color: #1a5bbf;
+        }
+
+        .spirit-box .spirit-desc {
+            font-size: 0.88rem;
+            color: #5a7a9a;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        .ending-text {
+            border-top: 2px solid #eaf0f8;
+            padding-top: 18px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.92rem;
+            color: #3a5a7a;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .ending-text .strong {
+            color: #0f2b4a;
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px 22px 18px;
+            box-shadow: 0 2px 12px rgba(0, 20, 40, 0.04);
+            border: 1px solid #e6edf8;
+        }
+
+        .sidebar-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #0f2b4a;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f4fa;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-card h4 i {
+            color: #1a5bbf;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f8fc;
+            font-size: 0.88rem;
+            color: #1a2a3a;
+            cursor: default;
+            transition: 0.1s;
+        }
+
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-item:hover {
+            color: #1a5bbf;
+        }
+
+        .sidebar-item .s-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: white;
+            flex-shrink: 0;
+            background: #1a5bbf;
+        }
+
+        .sidebar-item .s-info {
+            flex: 1;
+        }
+
+        .sidebar-item .s-info .s-name {
+            font-weight: 600;
+        }
+
+        .sidebar-item .s-info .s-desc {
+            font-size: 0.75rem;
+            color: #7f99bc;
+        }
+
+        .footer {
+            background: #0a1a2e;
+            color: #b0c8e0;
+            padding: 32px 40px 20px;
+            margin-top: 12px;
+        }
+
+        .footer .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .footer .footer-inner h4 {
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .footer .footer-inner p,
+        .footer .footer-inner a {
+            font-size: 0.82rem;
+            color: #8aaccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 3px;
+            transition: 0.2s;
+        }
+
+        .footer .footer-inner a:hover {
+            color: #ffffff;
+        }
+
+        .footer .footer-inner .school-info .name {
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .footer .footer-bottom {
+            max-width: 1100px;
+            margin: 16px auto 0;
+            padding-top: 14px;
+            border-top: 1px solid #1a2a4a;
+            font-size: 0.72rem;
+            color: #5a7a9a;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 6px 16px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .top-nav .left {
+                justify-content: center;
+            }
+            .top-nav .right {
+                justify-content: center;
+            }
+            .header {
+                padding: 14px 20px;
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .header .logo-area {
+                justify-content: center;
+            }
+            .header .quick-links {
+                justify-content: center;
+            }
+            .main-nav {
+                padding: 0 16px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .main-nav .nav-links {
+                justify-content: center;
+            }
+            .main-nav .nav-links a {
+                padding: 10px 14px;
+                font-size: 0.82rem;
+            }
+            .main-nav .nav-right {
+                justify-content: center;
+                padding: 6px 0;
+            }
+            .main-content {
+                padding: 20px 16px 18px;
+            }
+            .page-title {
+                font-size: 1.4rem;
+            }
+            .timeline-body {
+                padding-left: 0;
+                text-indent: 2em;
+            }
+            .timeline-year {
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+            .timeline-year .year {
+                font-size: 1.2rem;
+                min-width: auto;
+            }
+            .timeline-year .year-line {
+                display: none;
+            }
+            .project-table {
+                font-size: 0.78rem;
+            }
+            .project-table th,
+            .project-table td {
+                padding: 6px 10px;
+            }
+            .footer {
+                padding: 24px 16px 16px;
+            }
+            .footer .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .spirit-box .spirit-text {
+                font-size: 1.2rem;
+                letter-spacing: 4px;
+            }
+            .breadcrumb {
+                padding: 0 14px;
+            }
+            .main-container {
+                padding: 0 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header .company-name h1 {
+                font-size: 1.2rem;
+            }
+            .header .logo-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.4rem;
+            }
+            .page-title {
+                font-size: 1.2rem;
+            }
+            .page-title small {
+                font-size: 0.75rem;
+            }
+            .company-intro {
+                font-size: 0.88rem;
+                padding: 14px 16px;
+            }
+            .timeline-body {
+                font-size: 0.88rem;
+            }
+            .timeline-body .quote {
+                padding: 6px 12px 6px 16px;
+                font-size: 0.85rem;
+            }
+            .spirit-box {
+                padding: 14px 14px;
+            }
+            .spirit-box .spirit-text {
+                font-size: 1rem;
+                letter-spacing: 3px;
+            }
+            .project-table {
+                font-size: 0.7rem;
+            }
+            .project-table th,
+            .project-table td {
+                padding: 4px 6px;
+            }
+            .sidebar-card {
+                padding: 14px 14px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="left">
+            <span><i class="fas fa-calendar-alt"></i> 2026年4月19日 星期日</span>
+            <span><i class="fas fa-building"></i> 永振建筑 · 诚信为本</span>
+        </div>
+        <div class="right">
+            <a href="#"><i class="fas fa-envelope"></i> 联系我们</a>
+            <a href="#"><i class="fas fa-phone"></i> 0592-8888-666</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <img src="images/yzjz.jpg" alt="logo" style="width:56px;height:56px;border-radius:12px;object-fit:contain;display:block;">
+            </div>
+            <div class="company-name">
+                <h1>永振建筑</h1>
+                <div class="sub">YONGZHEN CONSTRUCTION</div>
+            </div>
+        </div>
+        <div class="quick-links">
+            <a href="#"><i class="fas fa-file-alt"></i> 工程案例</a>
+            <a href="#"><i class="fas fa-trophy"></i> 企业荣誉</a>
+            <a href="#"><i class="fas fa-users"></i> 人才招聘</a>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-links">
+            <a href="#">首页</a>
+            <a href="#">关于我们</a>
+            <a href="#">工程案例</a>
+            <a href="#">新闻中心</a>
+            <a href="#" class="active">发展历程</a>
+            <a href="#">联系我们</a>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="#">首页</a> &gt; <a href="#">关于我们</a> &gt; 发展历程
+    </div>
+
+    <div class="main-container">
+
+        <div class="main-content">
+
+            <div class="page-title">
+                发展历程
+                <small>HISTORY · 2009 — 2026</small>
+            </div>
+
+            <div class="company-intro">
+                <strong>永振建筑公司</strong>，成立于2009年，总部位于锦禾市。历经十余年发展，已从一支小型施工队成长为集建筑工程、市政工程、装饰装修于一体的综合性建筑企业。公司以“诚信为本、质量为根”为核心理念，参与建设了多项城市地标与民生工程，在业内享有良好口碑。
+            </div>
+
+            <div class="timeline-section">
+                <div class="timeline-year">
+                    <span class="year">2009</span>
+                    <span class="year-line"></span>
+                    <span class="label">筚路蓝缕 · 以启山林</span>
+                </div>
+                <div class="timeline-body">
+                    永振建筑公司的前身，是奚永振先生带领的一支仅有12人的小型施工队。凭借多年在建筑行业积累的经验与人脉，奚永振于当年正式注册成立<strong>永振建筑公司</strong>。创业之初，公司以承接住宅装修、小型翻修工程为主。
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <div class="timeline-year">
+                    <span class="year">2010-2012</span>
+                    <span class="year-line"></span>
+                    <span class="label">扎根生长 · 初具规模</span>
+                </div>
+                <div class="timeline-body">
+                    随着城市化进程加快，永振建筑抓住机遇，逐步拓展业务范围。公司从住宅装修升级为承接整栋居民楼的建设工程，团队规模也从最初的12人扩充至80余人。2011年，公司承接了<strong>锦禾市青平区首批安置房项目</strong>，这是公司承接的第一个政府工程。最终成功凭借该项目奠定了永振建筑在政府工程领域的信誉。2012年，公司正式取得<strong>建筑工程施工总承包三级资质</strong>，具备了独立承接中小型建筑的资格，标志着公司从“施工队”向“正规军”的转型。
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <div class="timeline-year">
+                    <span class="year">2013-2015</span>
+                    <span class="year-line"></span>
+                    <span class="label">跨越发展 · 铸就品牌</span>
+                </div>
+                <div class="timeline-body">
+                    这是永振建筑发展最快的三年。公司先后承接了<strong>锦禾市图书馆新馆</strong>、<strong>北安区文化中心</strong>等多个标志性项目，工程质量和施工速度获得业主单位一致好评。2014年，公司成功晋升为<strong>建筑工程施工总承包二级资质</strong>，并新增市政公用工程施工总承包资质，业务版图从单一的房建拓展至市政道路、桥梁等领域。2015年，永振建筑年产值突破<strong>2亿元</strong>，在职员工达320人，其中注册建造师18人，中高级技术人员46人。公司正式搬迁至自建的综合办公楼。同年，公司确立了<strong>“永筑精品、振业兴邦”</strong>的企业精神，并将其镌刻在公司大堂的影壁墙上，至今未变。
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <div class="timeline-year">
+                    <span class="year">2016-2017</span>
+                    <span class="year-line"></span>
+                    <span class="label">高峰之后 · 暗流涌动</span>
+                </div>
+                <div class="timeline-body">
+                    公司进入稳步上升期，业务覆盖锦禾市及周边三市，在建项目达12个。2017年，公司首次承接<strong>超高层建筑项目</strong>——锦禾国际金融中心（地下3层、地上38层），成为公司技术实力与管理能力的一次全面检验。
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <div class="timeline-year">
+                    <span class="year" style="color:#8b1a1a;">2018</span>
+                    <span class="year-line"></span>
+                    <span class="label" style="color:#8b1a1a;">擎天柱折 · 精神永存</span>
+                </div>
+                <div class="timeline-body">
+                    2018年10月，奚永振在去建筑工地监工路上因意外交通事故，享年44岁。噩耗传来，公司上下沉浸在巨大的悲痛之中。他的离去，是公司无法弥补的损失。
+                    <span class="quote">
+                        “父亲走了，但永振这两个字，我会替他扛下去。”
+                        <span class="author">—— 奚铭 2020年公司内部会议发言</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <div class="timeline-year">
+                    <span class="year">2019-2026</span>
+                    <span class="year-line"></span>
+                    <span class="label">承压前行 · 平稳过渡</span>
+                </div>
+                <div class="timeline-body">
+                    2022年，奚永振长子<strong>奚铭</strong>正式进入公司核心管理层，先后在工程部、预算部、市场部轮岗历练，逐步熟悉公司全流程业务。在此期间，公司管理团队稳定，在建项目有序推进。2023年，面对行业下行压力，公司主动调整战略，聚焦<strong>民生工程与城市更新</strong>领域，先后承接了多个老旧小区改造、学校扩建项目，在行业寒冬中保持了稳健经营。2025年，公司完成<strong>企业信用评级AAA认证</strong>，并获评“锦禾市建筑业先进单位”。这一年，奚铭以总经理身份主导了公司信息化管理系统建设，推动永振建筑向现代化管理迈进。
+                    <span class="quote">
+                        “父亲打下的江山，我不能让它倒。我要做的不是守成，是让永振走得更远。”
+                        <span class="author">—— 奚铭 2025年接受《锦禾日报》专访</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <div class="section-title"><i class="fas fa-list-ul"></i> 重点项目一览</div>
+                <div style="overflow-x:auto;">
+                    <table class="project-table">
+                        <thead>
+                            <tr>
+                                <th>年份</th>
+                                <th>项目名称</th>
+                                <th>类别</th>
+                                <th>备注</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>2011</td><td>青平区安置房项目</td><td>住宅</td><td class="remark">首个政府工程</td></tr>
+                            <tr><td>2013</td><td>锦禾市图书馆新馆</td><td>公共建筑</td><td class="remark">标志性项目</td></tr>
+                            <tr><td>2014</td><td>北安区文化中心</td><td>公共建筑</td><td class="remark">获市级优质工程奖</td></tr>
+                            <tr><td>2015</td><td>宁山风景区游客服务中心</td><td>旅游配套</td><td class="remark">首个景区项目</td></tr>
+                            <tr><td>2017</td><td>锦禾国际金融中心</td><td>超高层建筑</td><td class="remark">技术攻坚项目</td></tr>
+                            <tr><td>2023</td><td>锦禾市第三中学扩建</td><td>教育设施</td><td class="remark">民生工程</td></tr>
+                            <tr><td>2024</td><td>青平区老旧小区改造</td><td>城市更新</td><td class="remark">涉及12个小区</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="spirit-box">
+                <div class="spirit-text">
+                    永筑<span class="highlight">·</span>精品 &nbsp; 振业<span class="highlight">·</span>兴邦
+                </div>
+                <div class="spirit-desc">
+                    这八个字，是奚永振在2015年公司乔迁时亲笔写下的，至今仍悬挂在公司大堂最显眼的位置。
+                </div>
+            </div>
+
+            <div class="ending-text">
+                从父亲离世到接手公司，奚铭用新一代的视野与担当，让这家企业焕发出新的生机。<br>
+                <span class="strong">建筑是凝固的历史，永振的故事，还在继续。</span>
+            </div>
+
+        </div>
+
+        <aside class="sidebar">
+
+            <div class="sidebar-card">
+                <h4><i class="fas fa-info-circle"></i> 企业档案</h4>
+                <div style="font-size:0.88rem;color:#3a5a7a;line-height:2;">
+                    <p><strong style="color:#0f2b4a;">成立时间</strong><br>2009年</p>
+                    <p><strong style="color:#0f2b4a;">总部地址</strong><br>锦禾市青平区学府路88号</p>
+                    <p><strong style="color:#0f2b4a;">员工人数</strong><br>400+</p>
+                    <p><strong style="color:#0f2b4a;">年产值</strong><br>2.5亿元</p>
+                    <p><strong style="color:#0f2b4a;">企业资质</strong><br>建筑工程施工总承包二级</p>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <h4><i class="fas fa-trophy"></i> 荣誉资质</h4>
+                <div class="sidebar-item"><span class="s-icon" style="background:#b8860b;"><i class="fas fa-medal"></i></span><div class="s-info"><div class="s-name">AAA级信用企业</div><div class="s-desc">2025年</div></div></div>
+                <div class="sidebar-item"><span class="s-icon" style="background:#1a5bbf;"><i class="fas fa-award"></i></span><div class="s-info"><div class="s-name">锦禾市建筑业先进单位</div><div class="s-desc">2025年</div></div></div>
+                <div class="sidebar-item"><span class="s-icon" style="background:#27ae60;"><i class="fas fa-check-circle"></i></span><div class="s-info"><div class="s-name">市级优质工程奖</div><div class="s-desc">北安区文化中心</div></div></div>
+                <div class="sidebar-item"><span class="s-icon" style="background:#e67e22;"><i class="fas fa-star"></i></span><div class="s-info"><div class="s-name">永振质量奖</div><div class="s-desc">2018年设立</div></div></div>
+            </div>
+
+            <div class="sidebar-card">
+                <h4><i class="fas fa-clock"></i> 最新动态</h4>
+                <div class="sidebar-item"><div class="s-info"><div class="s-name">奚铭总经理出席行业峰会</div><div class="s-desc">2026.8.10</div></div></div>
+                <div class="sidebar-item"><div class="s-info"><div class="s-name">青平区老旧小区改造竣工</div><div class="s-desc">2026.7.28</div></div></div>
+                <div class="sidebar-item"><div class="s-info"><div class="s-name">公司获评“诚信示范企业”</div><div class="s-desc">2026.7.15</div></div></div>
+            </div>
+
+            <div class="sidebar-card">
+                <h4><i class="fas fa-link"></i> 快速链接</h4>
+                <div class="sidebar-item"><div class="s-info"><div class="s-name">📄 工程案例展示</div></div></div>
+                <div class="sidebar-item"><div class="s-info"><div class="s-name">🏗️ 在建项目</div></div></div>
+                <div class="sidebar-item"><div class="s-info"><div class="s-name">📞 业务咨询</div></div></div>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="school-info">
+                <div class="name">永振建筑</div>
+                <p>YONGZHEN CONSTRUCTION</p>
+                <p style="margin-top:6px;font-size:0.8rem;color:#6a8aaa;">诚信为本 · 质量为根</p>
+                <p style="margin-top:4px;font-size:0.82rem;color:#6a8aaa;">© 2026 永振建筑公司 版权所有</p>
+            </div>
+            <div>
+                <h4>关于我们</h4>
+                <a href="#">公司简介</a>
+                <a href="#">发展历程</a>
+                <a href="#">组织架构</a>
+                <a href="#">企业文化</a>
+            </div>
+            <div>
+                <h4>业务领域</h4>
+                <a href="#">建筑工程</a>
+                <a href="#">市政工程</a>
+                <a href="#">装饰装修</a>
+                <a href="#">工程咨询</a>
+            </div>
+            <div>
+                <h4>联系我们</h4>
+                <a href="#"><i class="fas fa-phone"></i> 0592-8888-666</a>
+                <a href="#"><i class="fas fa-envelope"></i> yz@yongzhen.com</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> 锦禾市青平区学府路88号</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            本网站内容仅供演示 · 永振建筑公司 虚拟官网
+        </div>
+    </footer>
+<!-- 独立页码小标 -->
+<div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); color: #ffffff; font-size: 13px; font-weight: bold; padding: 6px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); font-family: 'Courier New', monospace; letter-spacing: 1px; z-index: 999; user-select: none;">
+    5 / 20
+</div>
+
+</body>
+</html>

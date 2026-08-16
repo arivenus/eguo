@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宁山井家案 · 新闻</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e8e0d8;
+            font-family: 'Georgia', 'Times New Roman', '楷体', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
+            color: #1e1814;
+        }
+
+        .news-container {
+            max-width: 820px;
+            width: 100%;
+            background: #fcf9f5;
+            border-radius: 8px;
+            padding: 32px 40px 28px;
+            box-shadow: 0 2px 24px rgba(0, 0, 0, 0.03);
+            border: 1px solid #d8d0c8;
+        }
+
+        /* ===== 报头 ===== */
+        .newspaper-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 3px double #b8a898;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+        }
+
+        .newspaper-header .paper-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1410;
+            letter-spacing: 10px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .newspaper-header .paper-name .highlight {
+            color: #8a3a2a;
+        }
+
+        .newspaper-header .paper-meta {
+            font-size: 0.75rem;
+            color: rgba(120, 100, 80, 0.35);
+            letter-spacing: 3px;
+            text-align: right;
+            line-height: 1.6;
+            flex-shrink: 0;
+        }
+
+        .newspaper-header .paper-meta .divider {
+            color: rgba(180, 160, 140, 0.15);
+            margin: 0 4px;
+        }
+
+        /* ===== 标题一行 ===== */
+        .article-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid #e8e0d8;
+            padding-bottom: 10px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+        }
+
+        .article-title-row .main-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a1410;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+
+        .article-title-row .main-title .highlight {
+            color: #8a3a2a;
+        }
+
+        .article-title-row .sub-title {
+            font-size: 0.85rem;
+            color: rgba(120, 100, 80, 0.3);
+            letter-spacing: 4px;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 18px;
+            font-size: 0.78rem;
+            color: rgba(120, 100, 80, 0.3);
+            letter-spacing: 2px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0ece6;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== 正文 ===== */
+        .article-body {
+            font-size: 1.02rem;
+            line-height: 2.1;
+            color: #1e1814;
+            letter-spacing: 0.2px;
+        }
+
+        .article-body p {
+            text-indent: 2em;
+            margin-bottom: 1rem;
+        }
+
+        .article-body p:first-of-type {
+            text-indent: 0;
+        }
+
+        .article-body .dropcap {
+            font-size: 3.4rem;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 6px;
+            margin-top: 2px;
+            color: #1e1814;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .article-body .highlight-red {
+            color: #8a2a1a;
+            font-weight: 600;
+        }
+
+        .article-body .highlight-bold {
+            font-weight: 600;
+            color: #1a1410;
+        }
+
+        /* ===== 引用框 ===== */
+        .quote-block {
+            background: #f5f0ea;
+            border-left: 4px solid #b8a898;
+            padding: 14px 24px 12px 24px;
+            margin: 14px 0 16px 0;
+            border-radius: 0 6px 6px 0;
+            font-style: italic;
+            color: #2a221c;
+            text-indent: 0;
+            font-size: 0.98rem;
+        }
+
+        .quote-block .source {
+            display: block;
+            text-align: right;
+            font-style: normal;
+            font-size: 0.8rem;
+            color: rgba(120, 100, 80, 0.3);
+            margin-top: 4px;
+            letter-spacing: 2px;
+        }
+
+        /* ===== 警方联系 ===== */
+        .police-contact {
+            background: #f5f0ea;
+            border: 1px solid #e0d8d0;
+            border-radius: 8px;
+            padding: 16px 22px 14px;
+            margin-top: 18px;
+            font-size: 0.92rem;
+            color: #2a221c;
+            line-height: 1.8;
+        }
+
+        .police-contact .label {
+            font-weight: 600;
+            color: #1a1410;
+            letter-spacing: 2px;
+        }
+
+        .police-contact .phone {
+            color: #8a3a2a;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        /* ===== 底部链接 ===== */
+        .footer-link {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #f0ece6;
+        }
+
+        .footer-link a {
+            color: #1a5bbf;
+            font-size: 1rem;
+            text-decoration: none;
+            letter-spacing: 4px;
+            font-weight: 500;
+            transition: 0.3s;
+            padding: 4px 12px;
+            border-radius: 4px;
+        }
+
+        .footer-link a:hover {
+            color: #0f3d7a;
+            background: rgba(26, 91, 191, 0.04);
+            text-decoration: underline;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 0.7rem;
+            color: rgba(160, 140, 120, 0.15);
+            letter-spacing: 6px;
+            font-weight: 300;
+        }
+
+        @media (max-width: 640px) {
+            .news-container {
+                padding: 20px 16px 16px;
+            }
+            .newspaper-header .paper-name {
+                font-size: 1.5rem;
+                letter-spacing: 6px;
+            }
+            .article-title-row .main-title {
+                font-size: 1.2rem;
+            }
+            .article-title-row .sub-title {
+                font-size: 0.7rem;
+                white-space: normal;
+            }
+            .article-body {
+                font-size: 0.92rem;
+                line-height: 1.9;
+            }
+            .article-body .dropcap {
+                font-size: 2.6rem;
+            }
+            .newspaper-header .paper-meta {
+                font-size: 0.65rem;
+            }
+            .police-contact {
+                font-size: 0.82rem;
+                padding: 12px 14px 10px;
+            }
+            .footer-link a {
+                font-size: 0.9rem;
+                letter-spacing: 3px;
+            }
+            .article-meta {
+                font-size: 0.7rem;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .news-container {
+                padding: 14px 10px 12px;
+            }
+            .newspaper-header .paper-name {
+                font-size: 1.2rem;
+                letter-spacing: 4px;
+            }
+            .article-title-row .main-title {
+                font-size: 1rem;
+            }
+            .article-title-row .sub-title {
+                font-size: 0.6rem;
+            }
+            .article-body {
+                font-size: 0.85rem;
+                line-height: 1.8;
+            }
+            .article-body .dropcap {
+                font-size: 2rem;
+            }
+            .quote-block {
+                padding: 10px 14px 8px;
+                font-size: 0.88rem;
+            }
+            .police-contact {
+                font-size: 0.75rem;
+                padding: 8px 10px 8px;
+            }
+            .footer-link a {
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="news-container">
+
+        <!-- ===== 报头 ===== -->
+        <div class="newspaper-header">
+            <div class="paper-name">锦禾<span class="highlight">·</span>新闻</div>
+            <div class="paper-meta">
+                2018年9月15日 星期五 <span class="divider">|</span> 社会·深度 <span class="divider">|</span> A08版
+            </div>
+        </div>
+
+        <!-- ===== 标题一行 ===== -->
+        <div class="article-title-row">
+            <span class="main-title">母亲家中去世，父子失踪多年</span>
+            <span class="sub-title">警方呼吁群众提供线索</span>
+        </div>
+
+        <div class="article-meta">
+             <span>📍 锦禾市 · 宁山区</span>
+        </div>
+
+        <!-- ===== 正文 ===== -->
+        <div class="article-body">
+
+            <p>
+                <span class="dropcap">2</span><span style="font-weight:600;">015年6月29日</span>，锦禾市宁山区福雅小区发生一起蹊跷命案。
+                死者为中年女性<span class="highlight-bold">刘某</span>，时年四十二岁，系该小区常住户。
+                据警方通报，其丈夫<span class="highlight-bold">井荣</span>与独子<span class="highlight-bold">井扬</span>均于案发前后失踪，至今下落不明。
+            </p>
+
+            <p>
+                当天下午，刘某的邻居因多日未见其出门、且屋内传出异味，遂报警求助。
+                警方破门进入后发现，刘某倒卧于客厅沙发之上，身体已出现明显尸斑。
+                经法医现场初步鉴定，死亡时间约为三天前。
+            </p>
+
+            <p>
+                令人意外的是，屋内无任何打斗、翻动或侵入痕迹，门窗完好，财物未见丢失。
+                结合尸检结果，警方判定刘某系因突发疾病自然死亡，排除他杀可能。
+            </p>
+
+            <p>
+                但案件的疑点并未随之消散——刘某的丈夫<span class="highlight-bold">井荣</span>与儿子<span class="highlight-bold">井扬</span>，自案发后便不知所踪。
+            </p>
+
+            <p>
+                据调查，井荣系永振建筑公司职工，同事反映其于6月26日正常下班后便再未到岗，电话始终无法接通；
+                其子井扬就读于宁山初中，校方表示自6月27日起便未到校上课，班主任曾致电家中，无人接听。
+            </p>
+
+          
+            <p>
+                更令办案人员警觉的是，警方在刘某遗体旁的茶几上发现了一张手写留言条，字迹经鉴定为<span class="highlight-bold">井荣</span>所书。
+                上面写道：<span style="font-style:italic;color:#2a221c;">“儿子，如果爸爸今晚没回来，收拾东西躲得越远越好，不要让人发现你。爸爸爱你。”</span>
+            </p>
+
+            <p>
+                寥寥数语，却透露出事态的非比寻常——井荣似乎提前预感到某种危险，并紧急为儿子安排了“躲避”的路线。
+                究竟是什么样的威胁，让一名普通建筑工人选择将妻子留在家中，独自带子或令子独自离开？
+                父子二人如今又身在何处？一切尚无答案。
+            </p>
+
+            <p>
+                截至目前，井荣与井扬父子已失踪多年，音讯全无。
+                锦禾市公安局宁安分局将持续跟进调查。
+            </p>
+
+            <!-- ===== 警方联系 ===== -->
+            <div class="police-contact">
+                <div><span class="label"> 警方公告</span></div>
+                <div style="margin-top:4px;">
+                    如有知情者曾于2015年6月前后接触过 <span class="highlight-bold">井荣</span>、<span class="highlight-bold">井扬</span> 父子，
+                    或掌握任何相关线索，请速与宁安分局刑侦大队联系。
+                </div>
+                <div style="margin-top:6px;">
+                    <span class="label">📞 联系电话：</span><span class="phone">0451-8823XXXX</span>
+                    <span style="color:rgba(120,100,80,0.2);margin-left:12px;"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== 底部链接 ===== -->
+        <div class="footer-link">
+            <a href="wangpan.html" target="_blank"> 网盘</a>
+       </div>
+
+        <div class="footer-note">
+            — 锦禾新闻· 版权所有 —
+        </div>
+
+    </div>
+<!-- 独立页码小标 -->
+<div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); color: #ffffff; font-size: 13px; font-weight: bold; padding: 6px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); font-family: 'Courier New', monospace; letter-spacing: 1px; z-index: 999; user-select: none;">
+    14 / 20
+</div>
+
+</body>
+</html>

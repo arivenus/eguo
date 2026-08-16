@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宁山论坛 · 帖子</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e5e0d8;
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 30px 16px;
+            min-height: 100vh;
+        }
+
+        .post-container {
+            max-width: 700px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            padding: 28px 28px 20px;
+            border: 1px solid #e8e0d8;
+        }
+
+        .post-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #f0ece6;
+            font-size: 0.85rem;
+            color: #7a7268;
+        }
+
+        .post-nav .back {
+            cursor: default;
+            color: #5a7a5a;
+            font-weight: 500;
+        }
+        .post-nav .back:hover {
+            color: #3a5a3a;
+        }
+        .post-nav .sep {
+            color: #d0c8c0;
+        }
+        .post-nav .forum-name {
+            color: #3a342e;
+            font-weight: 600;
+        }
+
+        .post-header {
+            padding: 18px 0 12px 0;
+            border-bottom: 1px solid #f0ece6;
+        }
+
+        .post-header .title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a2a3a;
+            line-height: 1.5;
+        }
+
+        .post-header .meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #8a8278;
+            flex-wrap: wrap;
+        }
+
+        .post-header .meta .author {
+            font-weight: 600;
+            color: #3a5a7a;
+        }
+
+        .post-header .meta .badge {
+            background: #e8e4dc;
+            padding: 1px 12px;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            color: #5a524a;
+        }
+
+        .loor-content {
+            padding: 18px 0 16px 0;
+            border-bottom: 1px solid #f0ece6;
+            font-size: 1.02rem;
+            line-height: 1.9;
+            color: #2a241e;
+        }
+
+        .loor-content .loor-label {
+            font-weight: 600;
+            color: #3a7a5a;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+
+        .loor-content .text {
+            text-indent: 2em;
+        }
+
+        .action-bar {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0ece6;
+            font-size: 0.9rem;
+            color: #6a6258;
+        }
+
+        .action-bar span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: default;
+            transition: 0.15s;
+            padding: 4px 8px;
+            border-radius: 30px;
+        }
+
+        .action-bar span:hover {
+            background: #f0ece6;
+        }
+
+        .action-bar .liked {
+            color: #e74c3c;
+        }
+        .action-bar .liked i {
+            font-weight: 900;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0 10px 0;
+            font-size: 0.9rem;
+            color: #3a342e;
+            font-weight: 600;
+        }
+
+        .comment-header .count {
+            font-weight: 400;
+            color: #8a8278;
+            font-size: 0.85rem;
+        }
+
+        .comment-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comment-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f1ea;
+        }
+
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+
+        .comment-item .comment-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: #8a8278;
+            flex-wrap: wrap;
+        }
+
+        .comment-item .comment-meta .floor {
+            font-weight: 600;
+            color: #5a7a5a;
+            font-size: 0.7rem;
+            background: #eef0ea;
+            padding: 0 10px;
+            border-radius: 30px;
+        }
+
+        .comment-item .comment-meta .name {
+            font-weight: 500;
+            color: #3a5a7a;
+        }
+
+        .comment-item .comment-text {
+            margin-top: 4px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #2a241e;
+            padding-left: 4px;
+        }
+
+        .comment-item .comment-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: #a09888;
+        }
+
+        .comment-item .comment-actions span {
+            cursor: default;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            transition: 0.15s;
+            padding: 2px 6px;
+            border-radius: 30px;
+        }
+
+        .comment-item .comment-actions span:hover {
+            background: #f0ece6;
+        }
+
+        .comment-item .comment-actions .liked {
+            color: #e74c3c;
+        }
+        .comment-item .comment-actions .liked i {
+            font-weight: 900;
+        }
+
+        .reply-box {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid #f0ece6;
+        }
+
+        .reply-box input {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 30px;
+            border: 1px solid #e0dcd4;
+            outline: none;
+            font-size: 0.9rem;
+            background: #f8f6f2;
+            transition: 0.2s;
+            font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+        }
+
+        .reply-box input:focus {
+            border-color: #5a7a5a;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(90, 122, 90, 0.06);
+        }
+
+        .reply-box input::placeholder {
+            color: #b8b0a8;
+        }
+
+        .reply-box button {
+            background: #5a7a5a;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+            flex-shrink: 0;
+        }
+
+        .reply-box button:hover {
+            background: #4a6a4a;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 16px 10px;
+            }
+            .post-container {
+                padding: 18px 16px 16px;
+                border-radius: 12px;
+            }
+            .post-header .title {
+                font-size: 1.1rem;
+            }
+            .loor-content {
+                font-size: 0.95rem;
+            }
+            .comment-item .comment-text {
+                font-size: 0.9rem;
+            }
+            .action-bar {
+                gap: 14px;
+                font-size: 0.82rem;
+            }
+            .reply-box input {
+                font-size: 0.85rem;
+                padding: 8px 14px;
+            }
+            .reply-box button {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+            .comment-item .comment-meta {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .post-container {
+                padding: 14px 10px 12px;
+            }
+            .post-header .title {
+                font-size: 1rem;
+            }
+            .action-bar {
+                gap: 10px;
+                font-size: 0.75rem;
+                flex-wrap: wrap;
+            }
+            .action-bar span {
+                padding: 2px 4px;
+            }
+            .reply-box {
+                flex-direction: column;
+            }
+            .reply-box button {
+                width: 100%;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="post-container">
+
+    <div class="post-nav">
+        <span class="back">‹ 返回</span>
+        <span class="sep">|</span>
+        <span class="forum-name">锦禾市</span>
+    </div>
+
+    <div class="post-header">
+        <div class="title">你们知道宁山的诡异事吗？</div>
+        <div class="meta">
+            <span class="author">匿名用户（楼主）</span>
+            <span class="badge"># 灵异</span>
+        </div>
+    </div>
+
+    <div class="loor-content">
+        <div class="loor-label">楼主</div>
+        <div class="text">有人说宁山特别阴，有没有知道咋回事的？</div>
+    </div>
+
+    <div class="action-bar">
+        <span class="like-btn"><i class="fas fa-heart"></i> 136</span>
+        <span><i class="fas fa-comment"></i> 50</span>
+        <span><i class="fas fa-share-alt"></i> 分享</span>
+    </div>
+
+    <div class="comment-header">
+        <span>全部评论 <span class="count">（50条）</span></span>
+    </div>
+
+    <div class="comment-list" id="commentList">
+
+        <!-- ===== 现有评论（按楼层从高到低排列） ===== -->
+
+        <div class="comment-item" data-floor="50">
+            <div class="comment-meta">
+                <span class="floor">50楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">官方没给具体原因啊，这啥意思啊？</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 32</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="47">
+            <div class="comment-meta">
+                <span class="floor">47楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">不知道啊，难道投资方撤资了？</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 28</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="46">
+            <div class="comment-meta">
+                <span class="floor">46楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">怎么停工了？</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 21</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="43">
+            <div class="comment-meta">
+                <span class="floor">43楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">不一定是供神仙啊，万一是镇邪的呢。</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 45</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="42">
+            <div class="comment-meta">
+                <span class="floor">42楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">供奉哪路神仙啊？</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 18</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="41">
+            <div class="comment-meta">
+                <span class="floor">41楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">我看网上说要在宁山后山腰林子里建个什么古庙？</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 56</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="40">
+            <div class="comment-meta">
+                <span class="floor">40楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">我看山路去了好多挖掘机吊车，要建什么吗？</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 37</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="37">
+            <div class="comment-meta">
+                <span class="floor">37楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">这两年没那么邪了吧，我看估计要不了多久就能对外开放了。</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 29</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="36">
+            <div class="comment-meta">
+                <span class="floor">36楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">不知道为啥锁了，官方也给不出个原因。</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 41</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="15">
+            <div class="comment-meta">
+                <span class="floor">15楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">宁山正面挺正常的，还开发了旅游景区，但是后腰那边就很奇怪。</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 67</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="6">
+            <div class="comment-meta">
+                <span class="floor">6楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">真的，我家就是宁山区的，和父母去过一次，不小心迷路误入后山腰那片森林，特别阴森，说不出来的怪，之后就被封锁了。</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 89</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="5">
+            <div class="comment-meta">
+                <span class="floor">5楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">真的假的啊，我还想去宁山旅游呢。</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 34</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="4">
+            <div class="comment-meta">
+                <span class="floor">4楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">之前我家附近有一个流浪汉，后来失踪了，听说去了宁山就没回来。</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 52</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+        <div class="comment-item" data-floor="1">
+            <div class="comment-meta">
+                <span class="floor">1楼</span>
+                <span class="name">匿名用户</span>
+            </div>
+            <div class="comment-text">听说半夜总有很多人说话的声音，说的还都是相同的内容。</div>
+            <div class="comment-actions">
+                <span><i class="fas fa-thumbs-up"></i> 103</span>
+                <span><i class="fas fa-reply"></i> 回复</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="reply-box">
+        <input type="text" id="replyInput" placeholder="说点什么..." />
+        <button id="sendBtn">发送</button>
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js">
+</script>
+
+<script>
+    // ===== 点赞交互（主帖） =====
+    document.querySelectorAll('.like-btn, .comment-actions .fa-thumbs-up').forEach(function(el) {
+        let container = el.closest('span');
+        if (!container) return;
+
+        container.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const icon = this.querySelector('i');
+            const text = this.innerText.trim();
+            const count = parseInt(text.replace(/\D/g, '')) || 0;
+
+            if (this.classList.contains('liked')) {
+                this.classList.remove('liked');
+                if (icon) icon.className = 'fas fa-heart';
+                this.innerHTML = '<i class="fas fa-heart"></i> ' + (count - 1);
+            } else {
+                this.classList.add('liked');
+                if (icon) icon.className = 'fas fa-heart';
+                this.innerHTML = '<i class="fas fa-heart"></i> ' + (count + 1);
+            }
+        });
+    });
+
+    // ===== 发送评论 =====
+    const sendBtn = document.getElementById('sendBtn');
+    const replyInput = document.getElementById('replyInput');
+    const commentList = document.getElementById('commentList');
+    const countSpan = document.querySelector('.comment-header .count');
+
+    function getMaxFloor() {
+        let max = 50; // 当前最高楼层
+        document.querySelectorAll('.comment-item .floor').forEach(function(el) {
+            const num = parseInt(el.innerText.replace('楼', ''));
+            if (!isNaN(num) && num > max) max = num;
+        });
+        return max;
+    }
+
+    sendBtn.addEventListener('click', function() {
+        const text = replyInput.value.trim();
+        if (!text) {
+            alert('请输入评论内容');
+            return;
+        }
+
+        const newFloor = getMaxFloor() + 1;
+
+        const newComment = document.createElement('div');
+        newComment.className = 'comment-item';
+        newComment.dataset.floor = newFloor;
+        newComment.innerHTML = `
+                <div class="comment-meta">
+                    <span class="floor">${newFloor}楼</span>
+                    <span class="name">匿名用户</span>
+                </div>
+                <div class="comment-text">${text}</div>
+                <div class="comment-actions">
+                    <span><i class="fas fa-thumbs-up"></i> 0</span>
+                    <span><i class="fas fa-reply"></i> 回复</span>
+                </div>
+            `;
+
+        // 插入到列表最前面
+        commentList.insertBefore(newComment, commentList.firstChild);
+
+        // 更新评论数
+        const currentCount = parseInt(countSpan.innerText.replace(/\D/g, '')) || 50;
+        countSpan.innerText = '（' + (currentCount + 1) + '条）';
+
+        replyInput.value = '';
+        alert('评论发送成功！');
+
+        // 为新评论绑定点赞事件
+        newComment.querySelectorAll('.comment-actions .fa-thumbs-up').forEach(function(el) {
+            let container = el.closest('span');
+            if (!container) return;
+            container.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const icon = this.querySelector('i');
+                const text = this.innerText.trim();
+                const count = parseInt(text.replace(/\D/g, '')) || 0;
+                if (this.classList.contains('liked')) {
+                    this.classList.remove('liked');
+                    if (icon) icon.className = 'fas fa-heart';
+                    this.innerHTML = '<i class="fas fa-heart"></i> ' + (count - 1);
+                } else {
+                    this.classList.add('liked');
+                    if (icon) icon.className = 'fas fa-heart';
+                    this.innerHTML = '<i class="fas fa-heart"></i> ' + (count + 1);
+                }
+            });
+        });
+    });
+
+    // 回车发送
+    replyInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendBtn.click();
+        }
+    });
+</script>
+<!-- 独立页码小标 -->
+<div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); color: #ffffff; font-size: 13px; font-weight: bold; padding: 6px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); font-family: 'Courier New', monospace; letter-spacing: 1px; z-index: 999; user-select: none;">
+    8 / 20
+</div>
+
+</body>
+</html>

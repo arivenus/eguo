@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奚何夫妻坠崖新闻</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e8e0d8;
+            font-family: 'Georgia', 'Times New Roman', '楷体', 'KaiTi', serif;
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
+            min-height: 100vh;
+        }
+
+        .news-container {
+            max-width: 780px;
+            width: 100%;
+            background: #fcf9f5;
+            border-radius: 16px;
+            padding: 40px 44px 36px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e8e0d8;
+            position: relative;
+        }
+
+        /* ===== 报纸风格头部 ===== */
+        .news-header {
+            text-align: center;
+            border-bottom: 3px double #c4b8a8;
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .news-header .paper-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a2a3a;
+            letter-spacing: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        .news-header .paper-meta {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-size: 0.8rem;
+            color: #8a8278;
+            margin-top: 4px;
+            letter-spacing: 1px;
+            flex-wrap: wrap;
+        }
+
+        .news-header .paper-meta .date {
+            font-weight: 600;
+            color: #3a2a1a;
+        }
+
+        /* ===== 标题 ===== */
+        .news-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a2a3a;
+            line-height: 1.4;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .news-subtitle {
+            font-size: 1.05rem;
+            color: #5a4a3a;
+            font-style: italic;
+            margin-bottom: 16px;
+            border-left: 4px solid #7a5a3a;
+            padding-left: 16px;
+            line-height: 1.6;
+        }
+
+        /* ===== 正文 ===== */
+        .news-body {
+            font-size: 1.05rem;
+            line-height: 2;
+            color: #2a241e;
+            letter-spacing: 0.3px;
+        }
+
+        .news-body p {
+            text-indent: 2em;
+            margin-bottom: 1rem;
+        }
+
+        .news-body p:first-of-type {
+            text-indent: 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1a2a3a;
+        }
+
+        .news-body .highlight-name {
+            color: #7a3a1a;
+            font-weight: 700;
+        }
+
+        .news-body .highlight-place {
+            color: #3a5a4a;
+            font-weight: 600;
+        }
+
+        /* ===== 引用块 ===== */
+        .news-body .quote-block {
+            background: #f5f1ea;
+            border-left: 4px solid #7a5a3a;
+            padding: 12px 20px;
+            margin: 12px 0 16px 0;
+            font-style: italic;
+            color: #4a3a2a;
+            text-indent: 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.98rem;
+        }
+
+        .news-body .quote-block .source {
+            display: block;
+            text-align: right;
+            font-style: normal;
+            font-size: 0.85rem;
+            color: #8a7a6a;
+            margin-top: 4px;
+        }
+
+        /* ===== 分隔线 ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin: 18px 0 16px 0;
+            opacity: 0.25;
+        }
+
+        .divider .line {
+            flex: 1;
+            max-width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b8a898, transparent);
+        }
+
+        .divider .diamond {
+            font-size: 0.6rem;
+            color: #b8a898;
+        }
+
+        /* ===== 底部信息 ===== */
+        .news-footer {
+            margin-top: 22px;
+            padding-top: 16px;
+            border-top: 1px solid #ece6de;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: #9a8a7a;
+        }
+
+        .news-footer .source {
+            letter-spacing: 1px;
+        }
+
+        .news-footer .tag {
+            background: #ece6de;
+            padding: 2px 16px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #5a4a3a;
+            letter-spacing: 2px;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 600px) {
+            .news-container {
+                padding: 24px 18px 20px;
+                border-radius: 12px;
+            }
+            .news-header .paper-name {
+                font-size: 1.4rem;
+                letter-spacing: 6px;
+            }
+            .news-title {
+                font-size: 1.4rem;
+            }
+            .news-subtitle {
+                font-size: 0.95rem;
+                padding-left: 12px;
+            }
+            .news-body {
+                font-size: 0.95rem;
+            }
+            .news-body p:first-of-type {
+                font-size: 1rem;
+            }
+            .news-footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 6px;
+            }
+            .news-header .paper-meta {
+                gap: 12px;
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .news-container {
+                padding: 18px 12px 16px;
+            }
+            .news-header .paper-name {
+                font-size: 1.1rem;
+                letter-spacing: 4px;
+            }
+            .news-title {
+                font-size: 1.2rem;
+            }
+            .news-body {
+                font-size: 0.88rem;
+                line-height: 1.9;
+            }
+            .news-body .quote-block {
+                padding: 8px 14px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="news-container">
+
+    <!-- ===== 报头 ===== -->
+    <div class="news-header">
+        <div class="paper-name">锦禾日报</div>
+        <div class="paper-meta">
+            <span class="date">2018年10月18日 星期四</span>
+            <span>·</span>
+            <span>农历九月初十</span>
+            <span>·</span>
+            <span>第 A08 版</span>
+        </div>
+    </div>
+
+    <!-- ===== 标题 ===== -->
+    <h1 class="news-title">永振集团创始人奚永振与妻子何某不幸坠崖</h1>
+    <div class="news-subtitle">暴雨夜驾车前往宁山途中遭遇意外，警方初步认定为交通事故</div>
+
+    <!-- ===== 正文 ===== -->
+    <div class="news-body">
+
+        <p>2018年10月17日，锦禾市知名建筑企业永振集团创始人奚永振与妻子何某，在前往宁山途中，车辆失控滑出山路，坠落悬崖，二人不幸当场身亡。</p>
+
+        <p>据警方通报，事发当晚锦禾市普降暴雨，宁山区路段能见度极低，路面湿滑。奚永振驾驶一辆黑色越野车沿宁山公路行驶至一处弯道时，疑因视线受阻、车轮打滑，车辆冲出护栏，翻滚坠入约四十米深的山谷。</p>
+
+        <p>次日清晨，途经该路段的施工车辆发现护栏破损及路面轮胎痕迹，随即报警。救援人员到达现场后，确认车内两人均已无生命体征。经法医鉴定，二人死亡原因为颅脑损伤及胸腔脏器破裂，与高处坠落伤情吻合，排除他杀可能。</p>
+
+        <p>警方调取沿途监控及走访周边群众后确认，未发现其他异常情况。结合天气条件、路面状况及车辆检测结果，警方初步认定该案为一起交通事故。</p>
+
+        <div class="quote-block">
+            “结合天气条件、路面状况及车辆检测结果，警方初步认定该案为一起交通事故。”
+            <span class="source">—— 锦禾市公安局交通警察支队</span>
+        </div>
+
+        <p>公开资料显示，<span class="highlight-name">奚永振</span>时年44岁，系永振集团创始人兼董事长，早年以承接市政工程起家，凭借务实作风和工程质量在锦禾市建筑行业稳步立足。永振集团成立逾二十年，业务涵盖房地产开发、路桥建设及市政基础设施施工，是锦禾市颇具影响力的民营建筑企业之一。</p>
+
+        <p>妻子<span class="highlight-name">何某</span>，时年42岁，鲜少公开露面。二人育有一子一女，长子<span class="highlight-name">奚铭</span>，事发时年十四岁，幼女<span class="highlight-name">奚悦</span>，年仅九岁。</p>
+
+        <p>事故发生后，永振集团发布简短讣告，确认创始人夫妇遇难消息，并表示集团各项业务暂时由管理团队协同维持，后续事宜将依公司法和章程妥善处理。</p>
+
+    </div>
+
+    <!-- ===== 分隔线 ===== -->
+    <div class="divider">
+        <span class="line"></span>
+        <span class="diamond">◆</span>
+        <span class="line"></span>
+    </div>
+
+    <!-- ===== 底部 ===== -->
+    <div class="news-footer">
+        <span class="source">记者 林远 · 锦禾日报 宁山讯</span>
+        <span class="tag"># 突发 # 社会</span>
+    </div>
+
+</div>
+<!-- 独立页码小标 -->
+<div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); color: #ffffff; font-size: 13px; font-weight: bold; padding: 6px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); font-family: 'Courier New', monospace; letter-spacing: 1px; z-index: 999; user-select: none;">
+    6 / 20
+</div>
+
+</body>
+</html>
